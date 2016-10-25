@@ -182,13 +182,13 @@ void Repository::updatePerson(const Person *p)
     q.addBindValue(p->zipCode());
     q.addBindValue(p->location());
     q.addBindValue(p->birthday().toJulianDay());
+    q.addBindValue(p->mail());
     q.addBindValue(p->phoneArea());
     q.addBindValue(p->phoneNumber());
     q.addBindValue(p->mobileArea());
     q.addBindValue(p->mobileNumber());
     q.addBindValue(p->faxArea());
     q.addBindValue(p->faxNumber());
-    q.addBindValue(p->mail());
     q.addBindValue(p->institution());
     q.addBindValue(p->IBAN());
     q.addBindValue(p->BIC());
