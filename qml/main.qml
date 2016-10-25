@@ -47,9 +47,9 @@ ApplicationWindow {
         text: qsTr("Edit Person...")
         //shortcut:
         iconSource: "qrc:/icons/document-edit.svg"
-
         onTriggered: {
             var dialog = personDialogComponent.createObject(root);
+            dialog.person = repository.getPersonAt(personTable.__currentRow); // das ist bestimmt nicht der richtige Weg
             dialog.open;
         }
     }
@@ -66,7 +66,7 @@ ApplicationWindow {
         iconSource: "qrc:/icons/edit-find.svg"
 
         onTriggered: {
-            searchField.visible = true
+            searchField.visible = !searchField.visible
             searchField.selectAll()
             searchField.forceActiveFocus()
         }
