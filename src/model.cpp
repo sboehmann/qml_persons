@@ -6,6 +6,7 @@
 
 enum Section
 {
+    Title,
     Id,
     Firstname,
     Lastname,
@@ -22,6 +23,7 @@ Model::Model(QObject *parent)
   : QAbstractListModel(parent)
 {
     m_roleNames.clear();
+    m_roleNames.insert( Title           + Qt::UserRole + 1, QByteArrayLiteral( "title" ) );
     m_roleNames.insert( Id              + Qt::UserRole + 1, QByteArrayLiteral( "id" ) );
     m_roleNames.insert( Firstname       + Qt::UserRole + 1, QByteArrayLiteral( "firstname" ) );
     m_roleNames.insert( Lastname        + Qt::UserRole + 1, QByteArrayLiteral( "lastname" ) );
@@ -76,6 +78,8 @@ QVariant Model::data(const QModelIndex &index, int role) const
     QScopedPointer<Person> p(m_repo->getPersonAt(index.row()));
 
     switch( role ) {
+        case Qt::UserRole + 1 + Title:
+            return p->title();
         case Qt::UserRole + 1 + Id:
             return p->id();
         case Qt::UserRole + 1 + Firstname:

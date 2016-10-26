@@ -48,7 +48,13 @@ Item {
 
                 ComboBox {
                     id: title
-                    editable: true
+                    editable: false
+                    model: ListModel {
+                        id: titleOptions
+                        ListElement {text: qsTr("(n.a.)")}
+                        ListElement {text: qsTr("Frau")}
+                        ListElement {text: qsTr("Herr")}
+                    }
                 }
 
                 Label {

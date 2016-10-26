@@ -21,6 +21,7 @@ PersonEditForm
     mobileNumber: person.mobileNumber;
     mail: person.mail;
 
+    Binding { target: person; property: "title"; value: form.title; }
     Binding { target: person; property: "firstName"; value: form.firstName; }
     Binding { target: person; property: "lastName"; value: form.lastName; }
     Binding { target: person; property: "company"; value: form.company; }

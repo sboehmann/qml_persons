@@ -7,6 +7,11 @@ TableView {
 
     sortIndicatorVisible: true
 
+    // Wie editiert man das im Design mode?!
+    TableViewColumn {
+        role: "title"
+        title: qsTr("Title")
+    }
     TableViewColumn {
         role: "firstname"
         title: qsTr("First name")
