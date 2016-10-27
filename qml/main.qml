@@ -21,6 +21,11 @@ ApplicationWindow {
         PersonDialog {}
     }
 
+    Component {
+        id: deleteDialog
+        DeleteDialog {}
+    }
+
     // File actions
     Action {
         id: quitAction
@@ -49,7 +54,8 @@ ApplicationWindow {
         iconSource: "qrc:/icons/document-edit.svg"
         onTriggered: {
             var dialog = personDialogComponent.createObject(root);
-            dialog.person = repository.getPersonAt(personTable.__currentRow); // das ist bestimmt nicht der richtige Weg
+            dialog.person = repository.getPersonAt(personTable.__currentRow); // das ist bestimmt nicht der richtige Weg;
+            // diese person hat title "n.a.", obwohl die geparste Person noch "Herr" hat. Warum?
             dialog.open;
         }
     }
@@ -57,6 +63,11 @@ ApplicationWindow {
         id: deletePersonAction
         text: qsTr("Delete Person...")
         iconSource: "qrc:/icons/trash-empty.svg"
+        onTriggered: {
+            var dialog = deleteDialog.createObject(root);
+            dialog.personToKill = repository.getPersonAt(personTable.__currentRow);
+            dialog.open;
+        }
     }
 
     Action {

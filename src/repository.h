@@ -24,7 +24,8 @@ public:
     Q_INVOKABLE void upsertPerson(Person *p);
     Q_INVOKABLE void addPerson(Person *p);
     Q_INVOKABLE void updatePerson(const Person *p);
-    Q_INVOKABLE void removePerson(const Person *p);
+    Q_INVOKABLE void removePerson(Person *p);
+    Q_INVOKABLE void removePersonById(int id);
 
     Q_INVOKABLE bool exportData(const QString &fileName);
     Q_INVOKABLE bool importData(const QString &fileName);

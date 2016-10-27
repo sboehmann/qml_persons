@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
     Repository *repository = new Repository(&app);
 
     // clean database
-//    repository->purge();
+    // repository->purge();
 
     if(repository->countPersons() <= 0) {
         repository->importData(":/data/data.json");

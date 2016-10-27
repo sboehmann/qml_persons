@@ -119,8 +119,8 @@ void Repository::addPerson(Person *p)
     q.addBindValue(p->faxNumber());
     q.addBindValue(p->mail());
     q.addBindValue(p->institution());
-    q.addBindValue(p->BIC());
     q.addBindValue(p->IBAN());
+    q.addBindValue(p->BIC());
     q.addBindValue(p->notes());
     q.addBindValue(p->createdAt().toTime_t());
 
@@ -205,9 +205,14 @@ void Repository::updatePerson(const Person *p)
     emit dataChanged();
 }
 
-void Repository::removePerson(const Person *p)
+void Repository::removePerson(Person *p)
 {
-    QSqlQuery q( QString("DELETE FROM person WHERE id = %1").arg(p->id()) );
+    removePersonById(p->id());
+}
+
+void Repository::removePersonById(int id)
+{
+    QSqlQuery q( QString("DELETE FROM person WHERE id = %1").arg(id) );
     if(!q.exec()) {
         qDebug() << "failed to remove Person.";
     }
@@ -312,7 +317,6 @@ Person* Repository::parsePerson(const QSqlQuery &q) const
     p->setNotes( q.value("notes").toString() );
     p->setCreatedAt( QDateTime::fromTime_t( q.value("created_at").toUInt() ) );
     p->setUpdatedAt( QDateTime::fromTime_t( q.value("updated_at").toUInt() ) );
-
     return p;
 }
 
