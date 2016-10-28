@@ -4,7 +4,7 @@
 - [x] Einige Felder werden nicht gespeichert - finde heraus warum und fixe es.
 - [ ] Klick auf den Such-Button öffnet die Suche, aber ein weiterer Klick schließt es nicht wieder.... fixen.
 - [x] Füge die Spalte 'Title' in die Tabelle ein
-- [ ] Ebenfalls defekt ist der Button zum Löschen eines Eintrags. Hierbei sollte der Benutzer aber gefragt werden... sind Sie sicher!?
+- [x] Ebenfalls defekt ist der Button zum Löschen eines Eintrags. Hierbei sollte der Benutzer aber gefragt werden... sind Sie sicher!?
     oder du implementierst Undo/Redo - womit diese Aufgabe ein = wird. ;-)
 
 

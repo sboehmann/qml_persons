@@ -14,7 +14,6 @@
 #include <QtCore/QJsonObject>
 #include <QtCore/QJsonArray>
 
-
 Repository::Repository(QObject *parent)
   : QObject(parent)
 {
@@ -200,6 +199,9 @@ void Repository::updatePerson(Person *p)
 
     if(!q.exec()) {
         qDebug() << q.lastError().text()  << q.lastQuery();
+    }
+    else {
+      qDebug() << "Person updated";
     }
 
     emit dataChanged();
