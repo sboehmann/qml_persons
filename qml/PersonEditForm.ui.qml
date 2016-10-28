@@ -10,7 +10,7 @@ Item {
     implicitHeight: 480
     focus: true
 
-    property alias title: title.currentText
+    property alias title: titleSelection.currentText
     property alias firstName: firstName.text
     property alias lastName: lastName.text
     property alias company: company.text
@@ -26,6 +26,7 @@ Item {
     property alias mobileArea: mobileArea.text
     property alias mobileNumber: mobileNumber.text
     property alias mail: mail.text
+
 
     RowLayout {
         id: rowLayout
@@ -47,14 +48,10 @@ Item {
                 }
 
                 ComboBox {
-                    id: title
+                    id: titleSelection
                     editable: false
-                    model: ListModel {
-                        id: titleOptions
-                        ListElement {text: qsTr("(n.a.)")}
-                        ListElement {text: qsTr("Frau")}
-                        ListElement {text: qsTr("Herr")}
-                    }
+                    model: ["-", "Herr", "Frau", "Familie"]
+                    // currentIndex:2
                 }
 
                 Label {

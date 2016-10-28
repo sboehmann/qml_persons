@@ -55,7 +55,6 @@ ApplicationWindow {
         onTriggered: {
             var dialog = personDialogComponent.createObject(root);
             dialog.person = repository.getPersonAt(personTable.__currentRow); // das ist bestimmt nicht der richtige Weg;
-            // diese person hat title "n.a.", obwohl die geparste Person noch "Herr" hat. Warum?
             dialog.open;
         }
     }

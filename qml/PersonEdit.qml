@@ -3,8 +3,7 @@ import persons 1.0
 
 PersonEditForm
 {
-    property Person person: Person {}
-    // warum ist title "readonly"? wegen currentText?
+    property Person person: Person {}    
     firstName: person.firstName;
     lastName: person.lastName;
     company: person.company;
