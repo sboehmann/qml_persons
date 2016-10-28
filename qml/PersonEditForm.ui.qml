@@ -27,6 +27,9 @@ Item {
     property alias mobileArea: mobileArea.text
     property alias mobileNumber: mobileNumber.text
     property alias mail: mail.text
+    property alias bankInstitution: bankInstitution.text
+    property alias bankBIC: bankBIC.text
+    property alias bankIBAN: bankIBAN.text
 
     RowLayout {
         id: rowLayout
@@ -120,6 +123,9 @@ Item {
 
                 TextField {
                     id: birthday
+                    validator: RegExpValidator {
+                        regExp: /\d\d\d\d-\d\d-\d\d/
+                    }
                 }
             }
         }

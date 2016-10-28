@@ -14,7 +14,7 @@ PersonEditForm
     streetNo: person.streetNo;
     zipCode: person.zipCode;
     location: person.location;
-    birthday: person.birthday;
+    birthday: Qt.formatDate(person.birthday, "yyyy-MM-dd");
     phoneArea: person.phoneArea;
     phoneNumber: person.phoneNumber;
     faxArea: person.faxArea;
@@ -22,6 +22,9 @@ PersonEditForm
     mobileArea: person.mobileArea;
     mobileNumber: person.mobileNumber;
     mail: person.mail;
+    bankInstitution: person.institution;
+    bankBIC: person.BIC
+    bankIBAN: person.IBAN;
     title: person.title;
 
     onTitleChanged: {
@@ -51,4 +54,7 @@ PersonEditForm
     Binding { target: person; property: "mobileArea"; value: form.mobileArea; }
     Binding { target: person; property: "mobileNumber"; value: form.mobileNumber; }
     Binding { target: person; property: "mail"; value: form.mail; }
+    Binding { target: person; property: "institution"; value: form.bankInstitution; }
+    Binding { target: person; property: "BIC"; value: form.bankBIC; }
+    Binding { target: person; property: "IBAN"; value: form.bankIBAN; }
 }
