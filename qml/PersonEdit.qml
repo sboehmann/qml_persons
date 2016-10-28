@@ -3,7 +3,15 @@ import persons 1.0
 
 PersonEditForm
 {
+    id: form
+
     property Person person: Person {}
+
+    onPersonChanged: {
+        console.log('form.title', form.title)
+        console.log('person changed', person.title)
+        form.title = person.title
+    }
 
     firstName: person.firstName;
     lastName: person.lastName;
@@ -20,7 +28,9 @@ PersonEditForm
     mobileArea: person.mobileArea;
     mobileNumber: person.mobileNumber;
     mail: person.mail;
+    // title: person.title;
 
+    Binding { target: person; property: "title"; value: form.title; }
     Binding { target: person; property: "firstName"; value: form.firstName; }
     Binding { target: person; property: "lastName"; value: form.lastName; }
     Binding { target: person; property: "company"; value: form.company; }

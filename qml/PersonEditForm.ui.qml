@@ -4,13 +4,13 @@ import QtQuick.Layouts 1.2
 
 import persons 1.0
 
-
 Item {
+    id: root
     implicitWidth: 640
     implicitHeight: 480
     focus: true
 
-    property alias title: title.currentText
+    property var title
     property alias firstName: firstName.text
     property alias lastName: lastName.text
     property alias company: company.text
@@ -26,6 +26,10 @@ Item {
     property alias mobileArea: mobileArea.text
     property alias mobileNumber: mobileNumber.text
     property alias mail: mail.text
+
+    onTitleChanged: {
+        console.log('onTitleChanged', root.title)
+    }
 
     RowLayout {
         id: rowLayout
@@ -47,8 +51,11 @@ Item {
                 }
 
                 ComboBox {
-                    id: title
                     editable: true
+                    model: ["", "Mr.", "Mrs.", "Dr."]
+                    onCurrentTextChanged: {
+                        root.title = currentText
+                    }
                 }
 
                 Label {
