@@ -10,7 +10,8 @@ Item {
     implicitHeight: 480
     focus: true
 
-    property var title
+    property string title
+    property alias titleCb: titleCb
     property alias firstName: firstName.text
     property alias lastName: lastName.text
     property alias company: company.text
@@ -26,10 +27,6 @@ Item {
     property alias mobileArea: mobileArea.text
     property alias mobileNumber: mobileNumber.text
     property alias mail: mail.text
-
-    onTitleChanged: {
-        console.log('onTitleChanged', root.title)
-    }
 
     RowLayout {
         id: rowLayout
@@ -51,11 +48,9 @@ Item {
                 }
 
                 ComboBox {
+                    id: titleCb
                     editable: true
                     model: ["", "Mr.", "Mrs.", "Dr."]
-                    onCurrentTextChanged: {
-                        root.title = currentText
-                    }
                 }
 
                 Label {

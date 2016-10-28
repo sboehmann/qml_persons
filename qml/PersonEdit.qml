@@ -7,12 +7,6 @@ PersonEditForm
 
     property Person person: Person {}
 
-    onPersonChanged: {
-        console.log('form.title', form.title)
-        console.log('person changed', person.title)
-        form.title = person.title
-    }
-
     firstName: person.firstName;
     lastName: person.lastName;
     company: person.company;
@@ -28,9 +22,20 @@ PersonEditForm
     mobileArea: person.mobileArea;
     mobileNumber: person.mobileNumber;
     mail: person.mail;
-    // title: person.title;
+    title: person.title;
 
-    Binding { target: person; property: "title"; value: form.title; }
+    onTitleChanged: {
+        var index = titleCb.find(title)
+        titleCb.currentIndex = index === -1 ? 0 : index;
+    }
+
+    Connections {
+        target: titleCb
+        onCurrentTextChanged: {
+            person.title = titleCb.currentText
+        }
+    }
+
     Binding { target: person; property: "firstName"; value: form.firstName; }
     Binding { target: person; property: "lastName"; value: form.lastName; }
     Binding { target: person; property: "company"; value: form.company; }

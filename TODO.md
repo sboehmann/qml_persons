@@ -1,6 +1,6 @@
 ## TODO
 - [x] Der Button zum Bearbeiten eines Eintrags funktioniert nicht richtig
-- [ ] Der Title im New/Edit Dialog ist defekt - hier sollten Einträge wie Herr, Frau... zur Auswahl stehen (und gespeichert/geladen werden)
+- [x] Der Title im New/Edit Dialog ist defekt - hier sollten Einträge wie Herr, Frau... zur Auswahl stehen (und gespeichert/geladen werden)
 - [ ] Einige Felder werden nicht gespeichert - finde heraus warum und fixe es.
 - [ ] Klick auf den Such-Button öffnet die Suche, aber ein weiterer Klick schließt es nicht wieder.... fixen.
 - [ ] Füge die Spalte 'Title' in die Tabelle ein
