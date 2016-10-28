@@ -11,19 +11,16 @@ ApplicationWindow {
     height: 600
     title: qsTr("Persons")
 
-    Component {
-        id: aboutDialogComponent
+    Component {        id: aboutDialogComponent
         AboutDialog {}
     }
 
-    Component {
-        id: personDialogComponent
+    Component {        id: personDialogComponent
         PersonDialog {}
     }
 
     // File actions
-    Action {
-        id: quitAction
+    Action {        id: quitAction
         text: qsTr("E&xit")
         shortcut: StandardKey.Quit
         iconSource: "qrc:/icons/application-exit.svg"
@@ -31,8 +28,7 @@ ApplicationWindow {
     }
 
     // Edit actions
-    Action {
-        id: newPersonAction
+    Action {        id: newPersonAction
         text: qsTr("New Person...")
         shortcut: StandardKey.New
         iconSource: "qrc:/icons/document-new.svg"
@@ -42,8 +38,7 @@ ApplicationWindow {
             dialog.open
         }
     }
-    Action {
-        id: editPersonAction
+    Action {        id: editPersonAction
         text: qsTr("Edit Person...")
         //shortcut:
         iconSource: "qrc:/icons/document-edit.svg"
@@ -53,14 +48,12 @@ ApplicationWindow {
             dialog.open;
         }
     }
-    Action {
-        id: deletePersonAction
+    Action {        id: deletePersonAction
         text: qsTr("Delete Person...")
         iconSource: "qrc:/icons/trash-empty.svg"
     }
 
-    Action {
-        id: searchAction
+    Action {        id: searchAction
         text: qsTr("Find...")
         shortcut: StandardKey.Find
         iconSource: "qrc:/icons/edit-find.svg"
@@ -73,8 +66,7 @@ ApplicationWindow {
     }
 
     // Help action
-    Action {
-        id: aboutAction
+    Action {        id: aboutAction
         text: qsTr("&About ") + Qt.application.name
         iconSource: "qrc:/icons/help-about.svg"
         onTriggered: {
