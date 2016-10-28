@@ -14,6 +14,7 @@ enum Section
     ZipCode,
     Location,
     Phone,
+    Title,
     SectionCount
 };
 
@@ -29,6 +30,7 @@ Model::Model(QObject *parent)
     m_roleNames.insert( Street          + Qt::UserRole + 1, QByteArrayLiteral( "street" ) );
     m_roleNames.insert( ZipCode         + Qt::UserRole + 1, QByteArrayLiteral( "zipcode" ) );
     m_roleNames.insert( Phone           + Qt::UserRole + 1, QByteArrayLiteral( "phone" ) );
+    m_roleNames.insert( Title           + Qt::UserRole + 1, QByteArrayLiteral( "title" ) );
 }
 
 Model::Model(bool canFetchMore, QObject *parent)
@@ -91,6 +93,8 @@ QVariant Model::data(const QModelIndex &index, int role) const
             return p->location();
         case Qt::UserRole + 1 + Phone:
             return QString("%1/%2").arg(p->phoneArea(), p->phoneNumber());
+        case Qt::UserRole + 1 + Title:
+            return p->title();
 
         default:
             break;
