@@ -45,6 +45,7 @@ ApplicationWindow {
 
         onTriggered: {
             var dialog = personDialogComponent.createObject(root);
+            dialog.person = repository.getPersonAt(personTable.currentRow)
             dialog.open;
         }
     }
