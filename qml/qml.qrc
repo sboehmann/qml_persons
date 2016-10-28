@@ -9,5 +9,12 @@
         <file>PersonEdit.qml</file>
         <file>PersonEditForm.ui.qml</file>
         <file>ConfirmDeleteDialog.qml</file>
+        <file>FontAwesome.qml</file>
+        <file>qmldir</file>
+        <file>fontawesome-webfont.ttf</file>
+        <file>ValidatedTextField.qml</file>
+        <file>IBANTextField.qml</file>
+        <file>EmailTextField.qml</file>
+        <file>PhoneTextField.qml</file>
     </qresource>
 </RCC>

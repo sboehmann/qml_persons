@@ -2,8 +2,6 @@ import QtQuick 2.5
 import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.2
 
-import persons 1.0
-
 Item {
     id: root
     implicitWidth: 640
@@ -121,7 +119,7 @@ Item {
                     text: qsTr("Birthday:")
                 }
 
-                TextField {
+                ValidatedTextField {
                     id: birthday
                     validator: RegExpValidator {
                         regExp: /\d\d\d\d-\d\d-\d\d/
@@ -151,11 +149,11 @@ Item {
                     }
                     RowLayout {
                         Layout.fillWidth: true
-                        TextField {
+                        PhoneTextField {
                             id: phoneArea
                             placeholderText: qsTr("Area Code")
                         }
-                        TextField {
+                        PhoneTextField {
                             id: phoneNumber
                             placeholderText: qsTr("Number")
                             Layout.fillWidth: true
@@ -167,11 +165,11 @@ Item {
                     }
                     RowLayout {
                         Layout.fillWidth: true
-                        TextField {
+                        PhoneTextField {
                             id: mobileArea
                             placeholderText: qsTr("Area Code")
                         }
-                        TextField {
+                        PhoneTextField {
                             id: mobileNumber
                             placeholderText: qsTr("Number")
                             Layout.fillWidth: true
@@ -183,11 +181,11 @@ Item {
                     }
                     RowLayout {
                         Layout.fillWidth: true
-                        TextField {
+                        PhoneTextField {
                             id: faxArea
                             placeholderText: qsTr("Area Code")
                         }
-                        TextField {
+                        PhoneTextField {
                             id: faxNumber
                             placeholderText: qsTr("Number")
                             Layout.fillWidth: true
@@ -198,7 +196,7 @@ Item {
                         text: qsTr("Mail:")
                     }
 
-                    TextField {
+                    EmailTextField {
                         id: mail
                         Layout.fillWidth: true
                     }
@@ -229,7 +227,7 @@ Item {
                         text: qsTr("IBAN:")
                     }
 
-                    TextField {
+                    IBANTextField {
                         id: bankIBAN
                         Layout.fillWidth: true
                     }
