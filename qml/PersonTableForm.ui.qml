@@ -8,6 +8,10 @@ TableView {
     sortIndicatorVisible: true
 
     TableViewColumn {
+        role: "title"
+        title: qsTr("Title")
+    }
+    TableViewColumn {
         role: "firstname"
         title: qsTr("First name")
     }
@@ -24,7 +28,7 @@ TableView {
         title: qsTr("Street")
     }
     TableViewColumn {
-        role: "zip"
+        role: "zipcode"
         title: qsTr("ZIP Code")
     }
     TableViewColumn {

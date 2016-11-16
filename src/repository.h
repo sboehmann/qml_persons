@@ -14,7 +14,7 @@ class Repository : public QObject
 public:
     explicit Repository(QObject *parent = nullptr);
 
-    void purge();
+    Q_INVOKABLE void purge();
 
     Q_INVOKABLE int countPersons() const;
 
@@ -27,8 +27,11 @@ public:
     Q_INVOKABLE void removePerson(Person *p);
 
     Q_INVOKABLE bool exportData(const QString &fileName);
+    Q_INVOKABLE void importData(const QUrl &fileUrl);
     Q_INVOKABLE bool importData(const QString &fileName);
+    Q_INVOKABLE void exportData(const QUrl &fileUrl);
 
+    Q_INVOKABLE void removePersonById(int id);
 signals:
     void dataChanged();
 

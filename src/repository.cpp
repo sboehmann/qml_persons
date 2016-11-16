@@ -9,6 +9,7 @@
 #include <QtSql/QSqlQuery>
 #include <QtSql/QSqlError>
 #include <QtCore/QDebug>
+#include <QUrl>
 
 #include <QtCore/QJsonDocument>
 #include <QtCore/QJsonObject>
@@ -27,6 +28,8 @@ void Repository::purge()
     if( !q.exec() ) {
         qDebug() << q.lastError().text();
     }
+
+    emit dataChanged();
 }
 
 int Repository::countPersons() const
@@ -119,8 +122,8 @@ void Repository::addPerson(Person *p)
     q.addBindValue(p->faxNumber());
     q.addBindValue(p->mail());
     q.addBindValue(p->institution());
-    q.addBindValue(p->BIC());
     q.addBindValue(p->IBAN());
+    q.addBindValue(p->BIC());
     q.addBindValue(p->notes());
     q.addBindValue(p->createdAt().toTime_t());
 
@@ -182,13 +185,13 @@ void Repository::updatePerson(Person *p)
     q.addBindValue(p->zipCode());
     q.addBindValue(p->location());
     q.addBindValue(p->birthday().toJulianDay());
+    q.addBindValue(p->mail());
     q.addBindValue(p->phoneArea());
     q.addBindValue(p->phoneNumber());
     q.addBindValue(p->mobileArea());
     q.addBindValue(p->mobileNumber());
     q.addBindValue(p->faxArea());
     q.addBindValue(p->faxNumber());
-    q.addBindValue(p->mail());
     q.addBindValue(p->institution());
     q.addBindValue(p->IBAN());
     q.addBindValue(p->BIC());
@@ -213,6 +216,22 @@ void Repository::removePerson(Person *p)
     }
 
     emit dataChanged();
+}
+
+void Repository::removePersonById(int id)
+{
+    QSqlQuery q( QString("DELETE FROM person WHERE id = %1").arg(id));
+    if(!q.exec()) {
+        qDebug() << "failed to remove Person.";
+    }
+
+    emit dataChanged();
+}
+
+void Repository::exportData(const QUrl &fileUrl)
+{
+    auto fileName = fileUrl.toLocalFile();
+    exportData(fileName);
 }
 
 bool Repository::exportData(const QString &fileName)
@@ -244,6 +263,14 @@ bool Repository::exportData(const QString &fileName)
     file.close();
 
     return true;
+}
+
+void Repository::importData(const QUrl &fileUrl)
+{
+    auto fileName = fileUrl.toLocalFile();
+    if (importData(fileName)) {
+        emit dataChanged();
+    }
 }
 
 bool Repository::importData(const QString &fileName)
@@ -324,12 +351,12 @@ CREATE TABLE IF NOT EXISTS person (
   title               TEXT          NULL,
   firstname           TEXT          NULL,
   lastname            TEXT          NULL,
-  company	          TEXT          NULL,
+  company	      TEXT          NULL,
   street              TEXT          NULL,
   street_no           TEXT          NULL,
   zip_code            TEXT          NULL,
   location            TEXT          NULL,
-  birthday            INTERGER      NULL,
+  birthday            INTEGER       NULL,
   phone_area          TEXT          NULL,
   phone_number        TEXT          NULL,
   mobile_area         TEXT          NULL,

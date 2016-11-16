@@ -7,6 +7,7 @@
 enum Section
 {
     Id,
+    Title,
     Firstname,
     Lastname,
     Company,
@@ -23,11 +24,13 @@ Model::Model(QObject *parent)
 {
     m_roleNames.clear();
     m_roleNames.insert( Id              + Qt::UserRole + 1, QByteArrayLiteral( "id" ) );
+    m_roleNames.insert( Title           + Qt::UserRole + 1, QByteArrayLiteral( "title" ) );
     m_roleNames.insert( Firstname       + Qt::UserRole + 1, QByteArrayLiteral( "firstname" ) );
     m_roleNames.insert( Lastname        + Qt::UserRole + 1, QByteArrayLiteral( "lastname" ) );
     m_roleNames.insert( Company         + Qt::UserRole + 1, QByteArrayLiteral( "company" ) );
     m_roleNames.insert( Street          + Qt::UserRole + 1, QByteArrayLiteral( "street" ) );
     m_roleNames.insert( ZipCode         + Qt::UserRole + 1, QByteArrayLiteral( "zipcode" ) );
+    m_roleNames.insert( Location        + Qt::UserRole + 1, QByteArrayLiteral( "location" ) );
     m_roleNames.insert( Phone           + Qt::UserRole + 1, QByteArrayLiteral( "phone" ) );
 }
 
@@ -44,6 +47,7 @@ void Model::setRepository(Repository *r)
         m_repo->disconnect(this);
     }
     m_repo = r;
+
     connect(m_repo, &Repository::dataChanged, [&]() {
         beginResetModel();
         endResetModel();
@@ -68,6 +72,10 @@ QVariant Model::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
+    if (m_repo->countPersons() == 0) {
+        return QVariant();
+    }
+
     if( !index.isValid() ) {
         return QVariant();
     }
@@ -77,6 +85,8 @@ QVariant Model::data(const QModelIndex &index, int role) const
     switch( role ) {
         case Qt::UserRole + 1 + Id:
             return p->id();
+        case Qt::UserRole + 1 + Title:
+            return p->title();
         case Qt::UserRole + 1 + Firstname:
             return p->firstName();
         case Qt::UserRole + 1 + Lastname:

@@ -27,9 +27,9 @@ int main(int argc, char *argv[])
     // clean database
 //    repository->purge();
 
-    if(repository->countPersons() <= 0) {
-        repository->importData(":/data/data.json");
-    }
+//    if(repository->countPersons() <= 0) {
+//        repository->importData(":/data/data.json");
+//    }
 
     bool enableCanFetchMore = true;
     Model *model = new Model(enableCanFetchMore, &app);
@@ -39,8 +39,8 @@ int main(int argc, char *argv[])
     proxy->setSourceModel(model);
     proxy->sort(0);
 
-    //new ModelTest(model, &app);
-    //new ModelTest(proxy, &app);
+    new ModelTest(model, &app);
+    new ModelTest(proxy, &app);
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty(QStringLiteral("repository"), repository);

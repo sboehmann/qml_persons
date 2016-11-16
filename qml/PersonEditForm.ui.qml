@@ -10,7 +10,7 @@ Item {
     implicitHeight: 480
     focus: true
 
-    property alias title: title.currentText
+    property alias title: title.text
     property alias firstName: firstName.text
     property alias lastName: lastName.text
     property alias company: company.text
@@ -26,6 +26,9 @@ Item {
     property alias mobileArea: mobileArea.text
     property alias mobileNumber: mobileNumber.text
     property alias mail: mail.text
+    property alias institution: bankInstitution.text
+    property alias iban: bankIBAN.text
+    property alias bic: bankBIC.text
 
     RowLayout {
         id: rowLayout
@@ -46,9 +49,8 @@ Item {
                     text: qsTr("Title:")
                 }
 
-                ComboBox {
+                TitleComboBox {
                     id: title
-                    editable: true
                 }
 
                 Label {

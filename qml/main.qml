@@ -23,6 +23,24 @@ ApplicationWindow {
 
     // File actions
     Action {
+        id: importDataAction
+        text: qsTr("Import data...")
+        onTriggered: fileImportDialog.visible = true
+    }
+
+    Action {
+        id: exportDataAction
+        text: qsTr("Export data...")
+        onTriggered: fileExportDialog.visible = true
+    }
+
+    Action {
+        id: deleteDataAction
+        text: qsTr("Delete data")
+        onTriggered: repository.purge()
+    }
+
+    Action {
         id: quitAction
         text: qsTr("E&xit")
         shortcut: StandardKey.Quit
@@ -50,6 +68,7 @@ ApplicationWindow {
 
         onTriggered: {
             var dialog = personDialogComponent.createObject(root);
+            dialog.person = repository.getPersonAt(personTable.selectedRow);
             dialog.open;
         }
     }
@@ -57,6 +76,10 @@ ApplicationWindow {
         id: deletePersonAction
         text: qsTr("Delete Person...")
         iconSource: "qrc:/icons/trash-empty.svg"
+
+        onTriggered: {
+            deleteDialog.visible = true
+        }
     }
 
     Action {
@@ -66,7 +89,7 @@ ApplicationWindow {
         iconSource: "qrc:/icons/edit-find.svg"
 
         onTriggered: {
-            searchField.visible = true
+            searchField.visible = !searchField.visible
             searchField.selectAll()
             searchField.forceActiveFocus()
         }
@@ -86,6 +109,9 @@ ApplicationWindow {
     menuBar: MenuBar {
         Menu {
             title: qsTr("&File")
+            MenuItem { action: importDataAction }
+            MenuItem { action: exportDataAction }
+            MenuItem { action: deleteDataAction }
             MenuItem { action: quitAction }
         }
 
@@ -169,6 +195,11 @@ ApplicationWindow {
         id: personTable
         anchors.fill: parent
         model: personModel
+        property int selectedRow
+
+        onClicked: {
+            personTable.selectedRow = row
+        }
 
         onDoubleClicked: {
             var dialog = personDialogComponent.createObject(root);
@@ -176,4 +207,52 @@ ApplicationWindow {
             dialog.open
         }
     }
+
+    MessageDialog {
+        id: deleteDialog
+        title: "Delete?"
+        text: "Are you sure?"
+        visible: false
+        standardButtons: StandardButton.Ok | StandardButton.Cancel
+        onAccepted: {
+            var p = repository.getPersonAt(personTable.selectedRow);
+            repository.removePersonById(p.id);
+            visible = false;
+        }
+        onRejected: visible = false;
+    }
+
+    FileDialog {
+        id: fileImportDialog
+        title: "Please choose a file"
+        folder: shortcuts.home
+        selectMultiple: false
+        onAccepted: {
+            console.log("You chose: " + fileImportDialog.fileUrl)
+            repository.importData(fileImportDialog.fileUrl)
+            visible = false
+        }
+        onRejected: {
+            console.log("Canceled")
+        }
+        Component.onCompleted: visible = false
+    }
+
+    FileDialog {
+        id: fileExportDialog
+        title: "Please choose a file"
+        folder: shortcuts.home
+        selectMultiple: false
+        selectExisting: false
+        onAccepted: {
+            console.log("You chose: " + fileExportDialog.fileUrl)
+            repository.exportData(fileExportDialog.fileUrl)
+            visible = false
+        }
+        onRejected: {
+            console.log("Canceled")
+        }
+        Component.onCompleted: visible = false
+    }
+
 }
